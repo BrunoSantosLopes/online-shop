@@ -1,5 +1,5 @@
 # online-shop
-Projet OnlineShop en Java + JEE (formation)
+Projet OnlineShop avec JEE (formation HEG)
 
 # Objectif
 L’objectif est la réalisation d’un magasin de vente en ligne.
