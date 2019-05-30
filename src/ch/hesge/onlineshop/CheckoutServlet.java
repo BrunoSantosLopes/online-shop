@@ -15,8 +15,12 @@ import java.util.HashMap;
 @WebServlet("/checkout")
 public class CheckoutServlet  extends HttpServlet {
 
-    @Inject
     private CaddyServices caddyServices;
+
+    @Inject
+    public CheckoutServlet (CaddyServices caddyServices){
+        this.caddyServices = caddyServices;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

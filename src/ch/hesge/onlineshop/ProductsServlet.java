@@ -3,7 +3,7 @@ package ch.hesge.onlineshop;
 import ch.hesge.onlineshop.models.Product;
 import ch.hesge.onlineshop.services.IDBServices;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +15,7 @@ import java.util.List;
 @WebServlet("/products")
 public class ProductsServlet extends HttpServlet {
 
-    @Inject
+    @EJB
     private IDBServices dbServices;
 
     @Override

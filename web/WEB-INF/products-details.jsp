@@ -39,14 +39,7 @@
             </div>
         </div>
         <div class="container-images-product">
-            <%
-                Product product= (Product) request.getAttribute("product");
-                for (Image image: product.getImages()) {
-            %>
-
-            <img class="image-product" src="${pageContext.request.contextPath}/assets/images/<%=image.getUrlImage()%>" alt="${product.getName()}">
-
-            <%}%>
+            <img class="image-product" src="${pageContext.request.contextPath}/assets/images/${product.getImage().getUrlImage()}" alt="${product.getName()}">
         </div>
    </div>
 

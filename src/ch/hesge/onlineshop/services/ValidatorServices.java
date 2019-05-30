@@ -1,28 +1,21 @@
 package ch.hesge.onlineshop.services;
 
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ValidatorServices {
 
-    public Boolean isUUID(String id){
-
-        if (id == null || id.isEmpty()){
-            return false;
-        }
-
-        try{
-            UUID.fromString(id);
-        }
-        catch (IllegalArgumentException exception){
-            return false;
-        }
-
-        return true;
+    //Source : https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
+    public Boolean isInt(String value){
+            if(value == null || value.isEmpty()) return false;
+            for(int i = 0; i < value.length(); i++) {
+                if(i == 0 && value.charAt(i) == '-') {
+                    if(value.length() == 1) return false;
+                    else continue;
+                }
+                if(Character.digit(value.charAt(i),10) < 0) return false;
+            }
+            return true;
     }
 
     public Boolean isValidEmail(String email) {

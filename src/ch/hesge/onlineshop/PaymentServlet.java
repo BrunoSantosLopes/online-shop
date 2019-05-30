@@ -4,7 +4,6 @@ import ch.hesge.onlineshop.models.CreditCard;
 import ch.hesge.onlineshop.models.Product;
 import ch.hesge.onlineshop.services.CaddyServices;
 import ch.hesge.onlineshop.services.ValidatorServices;
-import sun.text.normalizer.UTF16;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -15,18 +14,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 @WebServlet("/payment")
 public class PaymentServlet  extends HttpServlet {
 
-    @Inject
     private CaddyServices caddyServices;
+    private ValidatorServices validatorServices;
 
     @Inject
-    private ValidatorServices validatorServices;
+    public PaymentServlet (ValidatorServices validatorServices, CaddyServices caddyServices){
+        this.validatorServices = validatorServices;
+        this.caddyServices = caddyServices;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

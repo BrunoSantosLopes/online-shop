@@ -40,11 +40,11 @@
 
         <div class="container-products">
             <%
-                List<Product> products= (ArrayList<Product>) request.getAttribute("products");
+                List<Product> products= (List<Product>) request.getAttribute("products");
                 for (Product product: products) {
             %>
             <jsp:include page="/components/product"  flush="true">
-                <jsp:param name="id" value="<%=product.getID().toString()%>"/>
+                <jsp:param name="id" value="<%=product.getID()%>"/>
             </jsp:include>
 
             <%}%>

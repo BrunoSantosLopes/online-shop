@@ -1,38 +1,45 @@
 package ch.hesge.onlineshop.models;
 
-import java.util.List;
+import javax.persistence.*;
 import java.util.Objects;
-import java.util.UUID;
 
+
+import static javax.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Product {
 
-    private UUID ID;
+    @Id
+    @GeneratedValue(strategy=IDENTITY)
+    private int ID;
     private String name;
     private Double price;
-    private Image mainImage;
-    private List<Image> images;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image image;
+
+    @Column(length = 9000)
     private String description;
 
-    public Product (UUID ID, String name, Double price, Image mainImage, List<Image> images, String description){
-        this.ID = ID;
+    public Product(){}
+
+    public Product (String name, Double price, Image image, String description){
         this.name = name;
         this.price = price;
-        this.mainImage = mainImage;
+        this.image = image;
         this.description = description;
-        this.images = images;
     }
 
-    public UUID getID() { return ID; }
+    public int getID() { return ID; }
     public String getName() {
         return name;
     }
     public double getPrice() {
         return price;
     }
-    public Image getMainImage() {
-        return mainImage;
+    public Image getImage() {
+        return image;
     }
-    public List<Image> getImages() { return images; }
+
     public String getDescription() { return description; }
     public String getDescriptionHTML() { return description.replace("\n", "<br />\n"); }
 

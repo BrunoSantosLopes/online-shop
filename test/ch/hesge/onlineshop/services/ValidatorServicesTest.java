@@ -12,18 +12,15 @@ class ValidatorServicesTest {
     private ValidatorServices validatorServices = new ValidatorServices();
 
     @Test
-    void isUUID() {
-        Boolean bool = validatorServices.isUUID("01234567-9ABC-DEF0-1234-56789ABCDEF0");
+    void isInt() {
+        Boolean bool = validatorServices.isInt("10");
         assertTrue(bool);
 
-        Boolean nullValue = validatorServices.isUUID(null);
+        Boolean nullValue = validatorServices.isInt(null);
         assertFalse(nullValue);
 
-        Boolean emptyValue = validatorServices.isUUID("");
+        Boolean emptyValue = validatorServices.isInt("");
         assertFalse(emptyValue);
-
-        Boolean format = validatorServices.isUUID("XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX");
-        assertFalse(format);
     }
 
 

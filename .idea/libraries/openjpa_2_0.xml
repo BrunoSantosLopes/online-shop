@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="openjpa 2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/openjpa-2.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

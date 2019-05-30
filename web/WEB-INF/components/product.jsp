@@ -1,7 +1,7 @@
 
 <div class="container-product" >
     <a class="container-product-link" href="${pageContext.request.contextPath}/products/?id=${product.getID()}">
-      <img class="image-background-product" src="${pageContext.request.contextPath}/assets/images/${product.getMainImage().getUrlImage()}" alt="${product.getName()}">
+      <img class="image-background-product" src="${pageContext.request.contextPath}/assets/images/${product.getImage().getUrlImage()}" alt="${product.getName()}">
       <div class="container-title-product" >
         <div class="title-product">
           <p class="title-text-product">${product.getName()}</p>

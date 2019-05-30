@@ -5,6 +5,8 @@ import ch.hesge.onlineshop.services.CaddyServices;
 import ch.hesge.onlineshop.services.IDBServices;
 import ch.hesge.onlineshop.services.ValidatorServices;
 
+import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.inject.Inject;
 
 import javax.servlet.ServletException;
@@ -15,17 +17,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import java.util.UUID;
-
 @WebServlet("/components/caddy")
 public class CaddyServlet extends HttpServlet {
 
-    @Inject
-    private CaddyServices caddyServices;
-    @Inject
+    @EJB
     private IDBServices dbServices;
-    @Inject
+    private CaddyServices caddyServices;
     private ValidatorServices validatorServices;
+
+    @Inject
+    public CaddyServlet (CaddyServices caddyServices, ValidatorServices validatorServices ){
+        this.caddyServices = caddyServices;
+        this.validatorServices = validatorServices;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,18 +42,18 @@ public class CaddyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (req.getParameter("id-add") != null && validatorServices.isUUID(req.getParameter("id-add"))) {
-            Product product = dbServices.getProduct(UUID.fromString(req.getParameter("id-add")));
+        if (req.getParameter("id-add") != null && validatorServices.isInt(req.getParameter("id-add"))) {
+            Product product = dbServices.getProduct(Integer.parseInt(req.getParameter("id-add")));
             caddyServices.addProduct(product, req);
             resp.sendRedirect(req.getHeader("Referer"));
         }
-        else if (req.getParameter("id-remove") != null && validatorServices.isUUID(req.getParameter("id-remove"))) {
-            Product product = dbServices.getProduct(UUID.fromString(req.getParameter("id-remove")));
+        else if (req.getParameter("id-remove") != null && validatorServices.isInt(req.getParameter("id-remove"))) {
+            Product product = dbServices.getProduct(Integer.parseInt(req.getParameter("id-remove")));
             caddyServices.removeProduct(product, req);
             resp.sendRedirect(req.getHeader("Referer"));
         }
-        else if (req.getParameter("id-delete") != null && validatorServices.isUUID(req.getParameter("id-delete"))) {
-            Product product = dbServices.getProduct(UUID.fromString(req.getParameter("id-delete")));
+        else if (req.getParameter("id-delete") != null && validatorServices.isInt(req.getParameter("id-delete"))) {
+            Product product = dbServices.getProduct(Integer.parseInt(req.getParameter("id-delete")));
             caddyServices.deleteProduct(product, req);
             resp.sendRedirect(req.getHeader("Referer"));
         } else {
