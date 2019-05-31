@@ -1,28 +1,28 @@
 package ch.hesge.onlineshop.services;
 
-import javax.ejb.Stateless;
+import javax.inject.Singleton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Stateless
+@Singleton
 public class ValidatorServices {
 
     //Source : https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
-    public Boolean isInt(String value){
-            if(value == null || value.isEmpty()) return false;
-            for(int i = 0; i < value.length(); i++) {
-                if(i == 0 && value.charAt(i) == '-') {
-                    if(value.length() == 1) return false;
-                    else continue;
-                }
-                if(Character.digit(value.charAt(i),10) < 0) return false;
+    public Boolean isInt(String value) {
+        if (value == null || value.isEmpty()) return false;
+        for (int i = 0; i < value.length(); i++) {
+            if (i == 0 && value.charAt(i) == '-') {
+                if (value.length() == 1) return false;
+                else continue;
             }
-            return true;
+            if (Character.digit(value.charAt(i), 10) < 0) return false;
+        }
+        return true;
     }
 
     public Boolean isValidEmail(String email) {
 
-        if (email == null || email.isEmpty()){
+        if (email == null || email.isEmpty()) {
             return false;
         }
 
@@ -32,7 +32,7 @@ public class ValidatorServices {
     }
 
     public Boolean isValidNumberCard(String numberCard) {
-        if (numberCard == null || numberCard.isEmpty()){
+        if (numberCard == null || numberCard.isEmpty()) {
             return false;
         }
 
@@ -43,7 +43,7 @@ public class ValidatorServices {
 
     public Boolean isValidMonth(String month) {
 
-        if (month == null || month.isEmpty()){
+        if (month == null || month.isEmpty()) {
             return false;
         }
 
@@ -56,8 +56,8 @@ public class ValidatorServices {
         try {
             int y = Integer.parseInt(year);
             return y >= 19 && y < 100;
-        } catch(Exception ex) {
-           return false;
+        } catch (Exception ex) {
+            return false;
         }
 
     }

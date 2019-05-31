@@ -1,7 +1,7 @@
-package ch.hesge.onlineshop;
+package ch.hesge.onlineshop.servlets;
 
 import ch.hesge.onlineshop.models.Product;
-import ch.hesge.onlineshop.services.IDBServices;
+import ch.hesge.onlineshop.services.ProductsServices;
 import ch.hesge.onlineshop.services.ValidatorServices;
 
 import javax.ejb.EJB;
@@ -17,11 +17,11 @@ import java.io.IOException;
 public class ProductsDetailsServlet extends HttpServlet {
 
     @EJB
-    private IDBServices dbServices;
+    private ProductsServices productsServices;
     private final ValidatorServices validatorServices;
 
     @Inject
-    public ProductsDetailsServlet(ValidatorServices validatorServices){
+    public ProductsDetailsServlet(ValidatorServices validatorServices) {
         this.validatorServices = validatorServices;
     }
 
@@ -29,13 +29,12 @@ public class ProductsDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
 
-        if (validatorServices.isInt(id)){
-            Product product = dbServices.getProduct(Integer.parseInt(id));
+        if (validatorServices.isInt(id)) {
+            Product product = productsServices.getProduct(Integer.parseInt(id));
             req.setAttribute("product", product);
             resp.setContentType("text/html");
             req.getRequestDispatcher("/WEB-INF/products-details.jsp").forward(req, resp);
-        }
-        else {
+        } else {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND);
         }
 

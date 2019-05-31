@@ -3,11 +3,11 @@ package ch.hesge.onlineshop.services;
 import ch.hesge.onlineshop.models.Image;
 import ch.hesge.onlineshop.models.Product;
 
-import javax.ejb.Stateless;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-@Stateless
+@Singleton
 public class DataServices {
     private List<Product> products = new ArrayList<>();
 

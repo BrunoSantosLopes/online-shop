@@ -1,9 +1,8 @@
-package ch.hesge.onlineshop;
+package ch.hesge.onlineshop.servlets;
 
 import ch.hesge.onlineshop.models.Product;
-import ch.hesge.onlineshop.services.IDBServices;
+import ch.hesge.onlineshop.services.ProductsServices;
 
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +14,15 @@ import java.util.List;
 @WebServlet("/products")
 public class ProductsServlet extends HttpServlet {
 
-    @EJB
-    private IDBServices dbServices;
+    private final ProductsServices productsServices;
+
+    public ProductsServlet(ProductsServices productsServices) {
+        this.productsServices = productsServices;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Product> products = dbServices.getProducts();
+        List<Product> products = productsServices.getProducts();
         resp.setContentType("text/html");
         req.setAttribute("products", products);
         req.getRequestDispatcher("/WEB-INF/products.jsp").forward(req, resp);

@@ -3,14 +3,13 @@ package ch.hesge.onlineshop.models;
 import javax.persistence.*;
 import java.util.Objects;
 
-
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 public class Product {
 
     @Id
-    @GeneratedValue(strategy=IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private int ID;
     private String name;
     private Double price;
@@ -20,28 +19,44 @@ public class Product {
     @Column(length = 9000)
     private String description;
 
-    public Product(){}
+    public Product() {
+    }
 
-    public Product (String name, Double price, Image image, String description){
+
+    public Product(String name, Double price, Image image, String description) {
         this.name = name;
         this.price = price;
         this.image = image;
         this.description = description;
     }
 
-    public int getID() { return ID; }
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public String getName() {
         return name;
     }
+
     public double getPrice() {
         return price;
     }
+
     public Image getImage() {
         return image;
     }
 
-    public String getDescription() { return description; }
-    public String getDescriptionHTML() { return description.replace("\n", "<br />\n"); }
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDescriptionHTML() {
+        return description.replace("\n", "<br />\n");
+    }
 
     @Override
     public boolean equals(Object o) {
