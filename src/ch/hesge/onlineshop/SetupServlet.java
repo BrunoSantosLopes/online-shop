@@ -18,7 +18,7 @@ public class SetupServlet extends HttpServlet {
 
     @EJB
     private IDBServices dbServices;
-    private DataServices dataServices;
+    private final DataServices dataServices;
 
     @Inject
     public SetupServlet(DataServices dataServices){
@@ -36,6 +36,8 @@ public class SetupServlet extends HttpServlet {
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             }
         }
-        resp.sendRedirect(req.getContextPath());
+        else {
+            resp.sendRedirect(req.getContextPath());
+        }
     }
 }

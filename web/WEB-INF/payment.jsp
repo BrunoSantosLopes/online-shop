@@ -1,6 +1,6 @@
 <%@ page import="ch.hesge.onlineshop.models.Product" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Bruno
   Date: 27.04.2019
@@ -25,7 +25,7 @@
                         <table class="table">
                             <%
                                 double total = 0.0;
-                                HashMap<Product, Integer> productsCaddy= (HashMap<Product, Integer>) request.getAttribute("productsCaddy");
+                                Map<Product, Integer> productsCaddy= (Map<Product, Integer>) request.getAttribute("productsCaddy");
                                 for (Map.Entry<Product,Integer> rowProductsCaddy: productsCaddy.entrySet()) {
                                     double price = rowProductsCaddy.getKey().getPrice() * rowProductsCaddy.getValue();
                                     total += price;

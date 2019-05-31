@@ -12,7 +12,6 @@ public class Image {
 
     @Id
     @GeneratedValue(strategy=IDENTITY)
-
     private int ID;
     private String urlImage;
 

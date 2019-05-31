@@ -18,7 +18,7 @@ public class ProductsDetailsServlet extends HttpServlet {
 
     @EJB
     private IDBServices dbServices;
-    private ValidatorServices validatorServices;
+    private final ValidatorServices validatorServices;
 
     @Inject
     public ProductsDetailsServlet(ValidatorServices validatorServices){

@@ -2,10 +2,7 @@ package ch.hesge.onlineshop.services;
 
 import ch.hesge.onlineshop.models.Product;
 
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -47,11 +44,10 @@ public class DBServices implements IDBServices {
     }
 
     @Override
-    public void persistProducts(List<Product> products) throws Exception {
-
-            for (Product product : products) {
-                em.persist(product);
-            }
-
+    @Transactional
+    public void persistProducts(List<Product> products){
+        for (Product product : products) {
+            em.persist(product);
+        }
     }
 }

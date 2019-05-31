@@ -1,6 +1,5 @@
 package ch.hesge.onlineshop;
 
-import ch.hesge.onlineshop.models.CreditCard;
 import ch.hesge.onlineshop.models.Product;
 import ch.hesge.onlineshop.services.CaddyServices;
 import ch.hesge.onlineshop.services.ValidatorServices;
@@ -14,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+import java.util.Map;
 
 
 @WebServlet("/payment")
 public class PaymentServlet  extends HttpServlet {
 
-    private CaddyServices caddyServices;
-    private ValidatorServices validatorServices;
+    private final CaddyServices caddyServices;
+    private final ValidatorServices validatorServices;
 
     @Inject
     public PaymentServlet (ValidatorServices validatorServices, CaddyServices caddyServices){
@@ -31,7 +30,7 @@ public class PaymentServlet  extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HashMap<Product, Integer> productsCaddy = caddyServices.getProducts(req);
+        Map<Product, Integer> productsCaddy = caddyServices.getProducts();
         req.setAttribute("productsCaddy", productsCaddy);
         resp.setContentType("text/html");
         req.getRequestDispatcher("/WEB-INF/payment.jsp").forward(req, resp);
@@ -70,7 +69,7 @@ public class PaymentServlet  extends HttpServlet {
         }
 
         if (!isValidForm) {
-            HashMap<Product, Integer> productsCaddy = caddyServices.getProducts(req);
+            Map<Product, Integer> productsCaddy = caddyServices.getProducts();
             req.setAttribute("productsCaddy", productsCaddy);
             req.setAttribute("name", name);
             req.setAttribute("email", email);
@@ -80,8 +79,7 @@ public class PaymentServlet  extends HttpServlet {
             resp.setContentType("text/html");
             req.getRequestDispatcher("/WEB-INF/payment.jsp").forward(req, resp);
         } else {
-            CreditCard creditCard = new CreditCard(name, email, numberCard, Integer.parseInt(month), Integer.parseInt(year));
-            caddyServices.clear(req);
+            caddyServices.clear();
             String message = "Merci pour votre commande !";
             resp.sendRedirect(req.getContextPath() +"/products?message="+ URLEncoder.encode(message, StandardCharsets.UTF_8.name()));
         }

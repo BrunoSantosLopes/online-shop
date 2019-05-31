@@ -4,7 +4,6 @@ import ch.hesge.onlineshop.models.Product;
 import ch.hesge.onlineshop.services.IDBServices;
 import ch.hesge.onlineshop.services.ValidatorServices;
 
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;

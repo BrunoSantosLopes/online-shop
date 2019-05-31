@@ -1,8 +1,10 @@
 package ch.hesge.onlineshop.services;
 
+import javax.ejb.Stateless;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Stateless
 public class ValidatorServices {
 
     //Source : https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java

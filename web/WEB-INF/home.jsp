@@ -5,7 +5,6 @@
   Time: 11:27
 --%>
 <%@ page import="ch.hesge.onlineshop.models.Product" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -28,7 +27,7 @@
         <div class="home-container" >
             <a href="${pageContext.request.contextPath}/products">
                 <div>
-                    <h1 class="home-title">Bienvenu à OnlineShop</h1>
+                    <h1 class="home-title">Bienvenue à OnlineShop</h1>
                 </div>
                 <div class="home-container-description">
                     <p>

@@ -1,5 +1,4 @@
-<%@ page import="ch.hesge.onlineshop.models.Product" %>
-<%@ page import="ch.hesge.onlineshop.models.Image" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Bruno
   Date: 27.04.2019

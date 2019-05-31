@@ -2,62 +2,47 @@ package ch.hesge.onlineshop.services;
 
 import ch.hesge.onlineshop.models.Product;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.Serializable;
 import java.util.*;
 
-public class CaddyServices {
 
-    private String SESSION_CADDY = "SESSION_CADDY";
+@SessionScoped
+@Named
+public class CaddyServices implements Serializable {
 
-    public void addProduct(Product product, HttpServletRequest req) {
-        setupSessionCaddy(req);
-        HashMap<Product, Integer> products = (HashMap<Product, Integer>)req.getSession().getAttribute(SESSION_CADDY);
-        if (products.containsKey(product)){
-            products.put(product, products.get(product)+1 );
+    private Map<Product, Integer> caddy = new HashMap<>();
+
+    public void addProduct(Product product) {
+        if (caddy.containsKey(product)){
+            caddy.put(product, caddy.get(product)+1 );
         }else{
-            products.put(product,1);
+            caddy.put(product,1);
         }
-        req.getSession().setAttribute(SESSION_CADDY,products);
     }
 
-    public HashMap<Product, Integer> getProducts(HttpServletRequest req){
-        setupSessionCaddy(req);
-        HashMap<Product, Integer> products = (HashMap<Product, Integer>)req.getSession().getAttribute(SESSION_CADDY);
-        return products;
+    public Map<Product, Integer> getProducts(){
+       return caddy;
     }
 
-    public int getSumProducts(HttpServletRequest req){
-        setupSessionCaddy(req);
-        HashMap<Product, Integer> products = (HashMap<Product, Integer>)req.getSession().getAttribute(SESSION_CADDY);
-        List<Integer> values = new ArrayList<>(products.values());
+    public int getSumProducts(){
+         List<Integer> values = new ArrayList<>(caddy.values());
         return values.stream().mapToInt(i->i).sum();
-
     }
 
-    private void setupSessionCaddy(HttpServletRequest req){
-        if (req.getSession().getAttribute(SESSION_CADDY) == null){
-            req.getSession().setAttribute(SESSION_CADDY, new HashMap<Product, Integer>());
+
+    public void removeProduct(Product product) {
+        if (caddy.containsKey(product) && caddy.get(product) > 1){
+            caddy.put(product, caddy.get(product)-1 );
         }
     }
 
-    public void removeProduct(Product product, HttpServletRequest req) {
-        setupSessionCaddy(req);
-        HashMap<Product, Integer> products = (HashMap<Product, Integer>)req.getSession().getAttribute(SESSION_CADDY);
-
-        if (products.containsKey(product) && products.get(product) > 1){
-            products.put(product, products.get(product)-1 );
-        }
-        req.getSession().setAttribute(SESSION_CADDY,products);
+    public void deleteProduct(Product product) {
+        caddy.remove(product);
     }
 
-    public void deleteProduct(Product product, HttpServletRequest req) {
-        setupSessionCaddy(req);
-        HashMap<Product, Integer> products = (HashMap<Product, Integer>)req.getSession().getAttribute(SESSION_CADDY);
-        products.remove(product);
-        req.getSession().setAttribute(SESSION_CADDY,products);
-    }
-
-    public void clear(HttpServletRequest req) {
-        req.getSession().setAttribute(SESSION_CADDY, new HashMap<Product, Integer>());
+    public void clear() {
+        caddy =  new HashMap<>();
     }
 }
