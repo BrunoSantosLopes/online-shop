@@ -42,6 +42,6 @@
         <jarDirectory url="file://Z:/apache-tomee-webprofile-1.7.4/lib" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="online-shop" level="project" />
   </component>
 </module>
