@@ -1,8 +1,9 @@
 package ch.hesge.onlineshop.servlets;
 
+
 import ch.hesge.onlineshop.models.Product;
 import ch.hesge.onlineshop.services.ProductsServices;
-import ch.hesge.onlineshop.services.ValidatorServices;
+import ch.hesge.onlineshop.services.DataValidator;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,45 +12,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
-@WebServlet("/servlets/caddy")
+import java.util.List;
+import java.util.Map;
+
+
+@WebServlet("/caddy/*")
 public class CaddyServlet extends HttpServlet {
 
     private final ProductsServices productsServices;
-    private final ValidatorServices validatorServices;
+    private final DataValidator dataValidator;
 
     @Inject
-    public CaddyServlet(ProductsServices productsServices, ValidatorServices validatorServices) {
+    public CaddyServlet(ProductsServices productsServices, DataValidator dataValidator) {
+        this.dataValidator = dataValidator;
         this.productsServices = productsServices;
-        this.validatorServices = validatorServices;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<Product, Integer> caddy = (Map<Product, Integer>) req.getSession().getAttribute("caddy");
+        req.getSession().setAttribute("nbProducts", getNumberProduct(caddy));
         resp.setContentType("text/html");
-        req.getRequestDispatcher("/WEB-INF/servlets/caddy.jsp").include(req, resp);
+        req.getRequestDispatcher("/WEB-INF/caddy.jsp").include(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect(req.getHeader("Referer"));
+    }
 
-        if (req.getParameter("id-add") != null && validatorServices.isInt(req.getParameter("id-add"))) {
-            Product product = productsServices.getProduct(Integer.parseInt(req.getParameter("id-add")));
-            //caddyServices.addProduct(product);
-            resp.sendRedirect(req.getHeader("Referer"));
-        } else if (req.getParameter("id-remove") != null && validatorServices.isInt(req.getParameter("id-remove"))) {
-            Product product = productsServices.getProduct(Integer.parseInt(req.getParameter("id-remove")));
-            //caddyServices.removeProduct(product);
-            resp.sendRedirect(req.getHeader("Referer"));
-        } else if (req.getParameter("id-delete") != null && validatorServices.isInt(req.getParameter("id-delete"))) {
-            Product product = productsServices.getProduct(Integer.parseInt(req.getParameter("id-delete")));
-            //caddyServices.deleteProduct(product);
-            resp.sendRedirect(req.getHeader("Referer"));
-        } else {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+    private int getNumberProduct(Map<Product, Integer> caddy){
+        List<Integer> values = new ArrayList<>(caddy.values());
+        int sum = 0;
+        for (Integer value: values) {
+            sum += value;
         }
-
-
+        return sum;
     }
 
 }
+
+

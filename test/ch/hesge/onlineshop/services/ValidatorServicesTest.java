@@ -1,7 +1,6 @@
 package ch.hesge.onlineshop.services;
 
 import org.junit.jupiter.api.Test;
-
 import javax.inject.Inject;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,10 +22,9 @@ class ValidatorServicesTest {
         assertFalse(emptyValue);
     }
 
-
     @Test
     void isValidEmail() {
-        Boolean boo = validatorServices.isValidEmail("bruno@bruno.ch");
+        Boolean boo = validatorServices.isValidEmail("abc@abc.ch");
         assertTrue(boo);
 
         Boolean nullValue = validatorServices.isValidEmail(null);
@@ -35,7 +33,7 @@ class ValidatorServicesTest {
         Boolean emptyValue = validatorServices.isValidEmail("");
         assertFalse(emptyValue);
 
-        Boolean format = validatorServices.isValidEmail("bruno@bruno");
+        Boolean format = validatorServices.isValidEmail("abc@abc");
         assertFalse(format);
 
     }

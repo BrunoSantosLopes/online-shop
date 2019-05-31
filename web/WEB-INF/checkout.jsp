@@ -1,4 +1,3 @@
-
 <%@ page import="ch.hesge.onlineshop.models.Product" %>
 <%@ page import="java.util.Map" %>
 <%--
@@ -18,68 +17,68 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/checkout.css">
 </head>
 <body>
-    <div class="container">
-        <table class="table">
-            <%
-                Double total = 0.0;
-                Map<Product, Integer> productsCaddy= (Map<Product, Integer>) request.getAttribute("productsCaddy");
-                for (Map.Entry<Product,Integer> rowProductsCaddy: productsCaddy.entrySet()) {
-                    Double price = rowProductsCaddy.getKey().getPrice() * rowProductsCaddy.getValue();
-                    total += price;
+<div class="container">
+    <table class="table">
+        <%
+            Double total = 0.0;
+            Map<Product, Integer> productsCaddy = (Map<Product, Integer>) request.getAttribute("productsCaddy");
+            for (Map.Entry<Product, Integer> rowProductsCaddy : productsCaddy.entrySet()) {
+                Double price = rowProductsCaddy.getKey().getPrice() * rowProductsCaddy.getValue();
+                total += price;
 
-            %>
-                <tr class="row">
-                    <td>
-                        <div class="cell">
-                            <%=rowProductsCaddy.getKey().getName()%>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cell">
-                            <%=rowProductsCaddy.getValue()%>
-                            <div class="table-cell-container-button">
-                                <form action="${pageContext.request.contextPath}/components/caddy" method="post">
-                                    <input type="hidden" name="id-add" value="<%=rowProductsCaddy.getKey().getID()%>">
-                                    <button class="table-cell-button" type="submit">+</button>
-                                </form>
-                                <form action="${pageContext.request.contextPath}/components/caddy" method="post">
-                                    <input type="hidden" name="id-remove" value="<%=rowProductsCaddy.getKey().getID()%>">
-                                    <button class="table-cell-button" type="submit">-</button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cell">
-                            <form action="${pageContext.request.contextPath}/components/caddy" method="post">
-                                <input type="hidden" name="id-delete" value="<%=rowProductsCaddy.getKey().getID()%>">
-                                <button class="table-cell-button" type="submit">
-                                    <img class="image-trash" src="${pageContext.request.contextPath}/assets/images/trash.png">
-                                </button>
-                            </form>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="cell">
-                            CHF <%=String.format("%.2f",price)%>-
-                        </div>
-                    </td>
-                </tr>
-            <%}%>
-        </table>
-        <div class="container-total">
-            <h2>Total</h2>
-            <h2>CHF <%=String.format("%.2f",total)%>-</h2>
-        </div>
-        <div class="container-pay">
-            <p><a class="back-link" href="${pageContext.request.contextPath}/products">Retour au shopping</a></p>
-            <% if (productsCaddy.size() > 0) { %>
-                <p><a class="pay-link" href="${pageContext.request.contextPath}/payment">Payer</a></p>
-            <% } else {%>
-                <p><a class="pay-link-disable">Pay</a></p>
-            <% } %>
-
-        </div>
+        %>
+        <tr class="row">
+            <td>
+                <div class="cell">
+                    <%=rowProductsCaddy.getKey().getName()%>
+                </div>
+            </td>
+            <td>
+                <div class="cell">
+                    <%=rowProductsCaddy.getValue()%>
+                    <div class="table-cell-container-button">
+                        <form action="${pageContext.request.contextPath}/caddy/add" method="post">
+                            <input type="hidden" name="id" value="<%=rowProductsCaddy.getKey().getID()%>">
+                            <button class="table-cell-button" type="submit">+</button>
+                        </form>
+                        <form action="${pageContext.request.contextPath}/caddy/remove" method="post">
+                            <input type="hidden" name="id" value="<%=rowProductsCaddy.getKey().getID()%>">
+                            <button class="table-cell-button" type="submit">-</button>
+                        </form>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="cell">
+                    <form action="${pageContext.request.contextPath}/caddy/delete" method="post">
+                        <input type="hidden" name="id" value="<%=rowProductsCaddy.getKey().getID()%>">
+                        <button class="table-cell-button" type="submit">
+                            <img class="image-trash" src="${pageContext.request.contextPath}/assets/images/trash.png">
+                        </button>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <div class="cell">
+                    CHF <%=String.format("%.2f", price)%>-
+                </div>
+            </td>
+        </tr>
+        <%}%>
+    </table>
+    <div class="container-total">
+        <h2>Total</h2>
+        <h2>CHF <%=String.format("%.2f", total)%>-</h2>
     </div>
+    <div class="container-pay">
+        <p><a class="back-link" href="${pageContext.request.contextPath}/products">Retour au shopping</a></p>
+        <% if (productsCaddy.size() > 0) { %>
+        <p><a class="pay-link" href="${pageContext.request.contextPath}/payment">Payer</a></p>
+        <% } else {%>
+        <p><a class="pay-link-disable">Pay</a></p>
+        <% } %>
+
+    </div>
+</div>
 </body>
 </html>

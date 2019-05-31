@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://Z:/apache-tomee-7.0.2-webprofile/apache-tomee-webprofile-7.0.2/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://Z:/apache-tomee-7.0.2-webprofile/apache-tomee-webprofile-7.0.2/lib" />
+    </SOURCES>
+    <jarDirectory url="file://Z:/apache-tomee-7.0.2-webprofile/apache-tomee-webprofile-7.0.2/lib" recursive="false" />
+    <jarDirectory url="file://Z:/apache-tomee-7.0.2-webprofile/apache-tomee-webprofile-7.0.2/lib" recursive="false" type="SOURCES" />
+  </library>
+</component>

@@ -1,6 +1,10 @@
 package ch.hesge.onlineshop.models;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -13,8 +17,7 @@ public class Product {
     private int ID;
     private String name;
     private Double price;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Image image;
+    private String urlImage;
 
     @Column(length = 9000)
     private String description;
@@ -22,11 +25,10 @@ public class Product {
     public Product() {
     }
 
-
-    public Product(String name, Double price, Image image, String description) {
+    public Product(String name, Double price, String urlImage, String description) {
         this.name = name;
         this.price = price;
-        this.image = image;
+        this.urlImage = urlImage;
         this.description = description;
     }
 
@@ -46,8 +48,8 @@ public class Product {
         return price;
     }
 
-    public Image getImage() {
-        return image;
+    public String getUrlImage() {
+        return urlImage;
     }
 
     public String getDescription() {
@@ -68,7 +70,6 @@ public class Product {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(ID);
     }
 }

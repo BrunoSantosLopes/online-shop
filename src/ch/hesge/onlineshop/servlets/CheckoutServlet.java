@@ -16,7 +16,7 @@ public class CheckoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Map<Product, Integer> productsCaddy = new HashMap<>();//caddyServices.getProducts();
+        Map<Product, Integer> productsCaddy = (Map<Product, Integer>) req.getSession().getAttribute("caddy");
         req.setAttribute("productsCaddy", productsCaddy);
         resp.setContentType("text/html");
         req.getRequestDispatcher("/WEB-INF/checkout.jsp").forward(req, resp);

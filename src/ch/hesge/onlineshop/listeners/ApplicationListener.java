@@ -13,9 +13,8 @@ import java.util.List;
 @WebListener
 public class ApplicationListener implements ServletContextListener {
 
-    private ProductsServices productsServices;
-    private DataServices dataServices;
-
+    private final ProductsServices productsServices;
+    private final DataServices dataServices;
 
     @Inject
     public ApplicationListener(DataServices dataServices, ProductsServices productsServices) {

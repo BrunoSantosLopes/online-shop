@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Singleton
-public class ValidatorServices {
+public class DataValidator {
 
     //Source : https://stackoverflow.com/questions/5439529/determine-if-a-string-is-an-integer-in-java
     public Boolean isInt(String value) {

@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/components/caddy.css">
 </head>
 <body>
-    <jsp:include page="/components/menu-bar" />
+    <jsp:include page="/menu-bar"/>
     <div class="container">
         <img class="bad-luck-image" src="${pageContext.request.contextPath}/assets/images/bad-luck.gif">
         <h1>Oh non, pas de chance !</h1>

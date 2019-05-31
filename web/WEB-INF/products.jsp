@@ -19,35 +19,31 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/components/caddy.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/assets/css/components/product.css">
 <body>
-    <jsp:include page="/components/menu-bar" />
-    <div class="container">
-
-        <%
-            String message = request.getParameter("message");
-            if (message != null && !message.isEmpty() ){
-        %>
-
-            <div class="banner">
-                <h2 class="banner-text"><%= message %></h2>
-            </div>
-
-        <%  } %>
-
-        <h1>OnlineShop - Produits</h1>
-
-
-
-        <div class="container-products">
-            <%
-                List<Product> products= (List<Product>) request.getAttribute("products");
-                for (Product product: products) {
-            %>
-            <jsp:include page="/components/product"  flush="true">
-                <jsp:param name="id" value="<%=product.getID()%>"/>
-            </jsp:include>
-
-            <%}%>
-        </div>
+<jsp:include page="/menu-bar"/>
+<div class="container">
+    <%
+        String message = request.getParameter("message");
+        if (message != null && !message.isEmpty()) {
+    %>
+    <div class="banner">
+        <h2 class="banner-text">
+            <%= message %>
+        </h2>
     </div>
+    <% } %>
+    <h1>OnlineShop - Produits</h1>
+    <div class="container-products">
+        <%
+            List<Product> products = (List<Product>) request.getAttribute("products");
+            for (Product product : products) {
+        %>
+        <jsp:include page="/product/" flush="true">
+            <jsp:param name="id" value="<%=product.getID()%>"/>
+            <jsp:param name="full" value="false"/>
+        </jsp:include>
+
+        <%}%>
+    </div>
+</div>
 </body>
 </html>
