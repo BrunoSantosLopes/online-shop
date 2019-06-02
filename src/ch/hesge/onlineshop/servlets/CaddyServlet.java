@@ -21,15 +21,6 @@ import java.util.Map;
 @WebServlet("/caddy/*")
 public class CaddyServlet extends HttpServlet {
 
-    private final ProductsServices productsServices;
-    private final DataValidator dataValidator;
-
-    @Inject
-    public CaddyServlet(ProductsServices productsServices, DataValidator dataValidator) {
-        this.dataValidator = dataValidator;
-        this.productsServices = productsServices;
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<Product, Integer> caddy = (Map<Product, Integer>) req.getSession().getAttribute("caddy");

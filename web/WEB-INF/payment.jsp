@@ -58,7 +58,7 @@
                     <label>Nom : </label>
                     <div class="input">
                         <input name="name" type="text" placeholder="Nom" required autofocus autocomplete="off"
-                               value="${name}" />
+                               value="${name}"/>
                         <p class="red">${nameMessage}</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <label>Email :</label>
                     <div class="input">
                         <input name="email" type="email" placeholder="Email" required autocomplete="off"
-                               value="${email}" />
+                               value="${email}"/>
                         <p class="red">${emailMessage}</p>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                     <label>Carte de crédit :</label>
                     <div class="input">
                         <input name="numberCard" type="text" placeholder="Carte de crédit" minlength="16" maxlength="16"
-                               required autocomplete="off" value="${numberCard}" />
+                               required autocomplete="off" value="${numberCard}"/>
                         <p class="red">${numberCardMessage}</p>
                     </div>
                 </div>
@@ -86,12 +86,12 @@
                     <div class="field-month-year">
                         <div class="input">
                             <input name="month" type="number" placeholder="Month" min="1" max="12" required
-                                   autocomplete="off" value="${month}" />
+                                   autocomplete="off" value="${month}"/>
                             <p class="red">${monthMessage}</p>
                         </div>
                         <div class="input">
                             <input name="year" type="number" placeholder="Year" min="19" max="99" required
-                                   autocomplete="off" value="${year}" />
+                                   autocomplete="off" value="${year}"/>
                             <p class="red">${yearMessage}</p>
                         </div>
                     </div>

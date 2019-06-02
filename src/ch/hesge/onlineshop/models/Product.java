@@ -56,10 +56,6 @@ public class Product {
         return description;
     }
 
-    public String getDescriptionHTML() {
-        return description.replace("\n", "<br />\n");
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

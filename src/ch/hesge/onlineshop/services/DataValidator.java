@@ -1,5 +1,7 @@
 package ch.hesge.onlineshop.services;
 
+import ch.hesge.onlineshop.models.FormPayment;
+
 import javax.inject.Singleton;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,5 +62,35 @@ public class DataValidator {
             return false;
         }
 
+    }
+
+    public boolean isValidFormPayment(FormPayment formPayment) {
+
+        if (formPayment.getName() == null || formPayment.getName().isEmpty() || formPayment.getName().trim().isEmpty()) {
+            formPayment.setValidName(false);
+            return false;
+        }
+
+        if (!isValidEmail(formPayment.getEmail())) {
+            formPayment.setValidEmail(false);
+            return false;
+        }
+
+        if (!isValidNumberCard(formPayment.getNumberCard())) {
+            formPayment.setValidNumberCard(false);
+            return false;
+        }
+
+        if (!isValidMonth(formPayment.getMonth())) {
+            formPayment.setValidMonth(false);
+            return false;
+        }
+
+        if (!isValidYear(formPayment.getYear())) {
+            formPayment.setValidYear(false);
+            return false;
+        }
+
+        return true;
     }
 }

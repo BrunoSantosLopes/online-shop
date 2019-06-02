@@ -37,23 +37,12 @@ public class PaymentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        String name = req.getParameter("name");
-        String email = req.getParameter("email");
-        String numberCard = req.getParameter("numberCard");
-        String month = req.getParameter("month");
-        String year = req.getParameter("year");
-
-        FormPayment formPayment = new FormPayment(name, email, numberCard, month, year);
-
-        if (!isValidFormPayment(formPayment, req)) {
+        FormPayment formPayment = setupFormPayment(req);
+        if (!dataValidator.isValidFormPayment(formPayment)) {
+            setupErrorMessage(req, formPayment);
+            setupAttribute(req, formPayment);
             Map<Product, Integer> productsCaddy = (Map<Product, Integer>) req.getSession().getAttribute("caddy");
             req.setAttribute("productsCaddy", productsCaddy);
-            req.setAttribute("name", formPayment.getName());
-            req.setAttribute("email", formPayment.getEmail());
-            req.setAttribute("numberCard", formPayment.getNumberCard());
-            req.setAttribute("month", formPayment.getMonth());
-            req.setAttribute("year", formPayment.getYear());
             resp.setContentType("text/html");
             req.getRequestDispatcher("/WEB-INF/payment.jsp").forward(req, resp);
         } else {
@@ -63,31 +52,38 @@ public class PaymentServlet extends HttpServlet {
         }
     }
 
-    public Boolean isValidFormPayment(FormPayment formPayment, HttpServletRequest req){
-        Boolean isValid = true;
-
-        if (formPayment.getName() == null || formPayment.getName().isEmpty() || formPayment.getName().trim().isEmpty()) {
-            isValid = false;
-            req.setAttribute("nameMessage", "Le nom est requis");
-        }
-        if (!dataValidator.isValidEmail(formPayment.getEmail())) {
-            isValid = false;
-            req.setAttribute("emailMessage", "L'email est invalide");
-        }
-        if (!dataValidator.isValidNumberCard(formPayment.getNumberCard())) {
-            isValid = false;
-            req.setAttribute("numberCardMessage", "La carte de crédit est invalide");
-        }
-        if (!dataValidator.isValidMonth(formPayment.getMonth())) {
-            isValid = false;
-            req.setAttribute("monthMessage", "Le mois est invalide");
-        }
-        if (!dataValidator.isValidYear(formPayment.getYear())) {
-            isValid = false;
-            req.setAttribute("yearMessage", "L'année est invalide");
-        }
-
-        return isValid;
+    private FormPayment setupFormPayment(HttpServletRequest req) {
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String numberCard = req.getParameter("numberCard");
+        String month = req.getParameter("month");
+        String year = req.getParameter("year");
+        return new FormPayment(name, email, numberCard, month, year);
     }
 
+    private void setupErrorMessage(HttpServletRequest req, FormPayment formPayment) {
+        if (!formPayment.getValidEmail()) {
+            req.setAttribute("emailMessage", "L'email est invalide");
+        }
+        if (!formPayment.getValidMonth()) {
+            req.setAttribute("monthMessage", "Le mois est invalide");
+        }
+        if (!formPayment.getValidName()) {
+            req.setAttribute("nameMessage", "Le nom est requis");
+        }
+        if (!formPayment.getValidNumberCard()) {
+            req.setAttribute("numberCardMessage", "La carte de crédit est invalide");
+        }
+        if (!formPayment.getValidYear()) {
+            req.setAttribute("yearMessage", "L'année est invalide");
+        }
+    }
+
+    private void setupAttribute(HttpServletRequest req, FormPayment formPayment) {
+        req.setAttribute("name", formPayment.getName());
+        req.setAttribute("email", formPayment.getEmail());
+        req.setAttribute("numberCard", formPayment.getNumberCard());
+        req.setAttribute("month", formPayment.getMonth());
+        req.setAttribute("year", formPayment.getYear());
+    }
 }

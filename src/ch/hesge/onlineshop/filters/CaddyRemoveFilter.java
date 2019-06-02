@@ -1,7 +1,6 @@
 package ch.hesge.onlineshop.filters;
 
 import ch.hesge.onlineshop.models.Product;
-import ch.hesge.onlineshop.services.DataServices;
 import ch.hesge.onlineshop.services.DataValidator;
 import ch.hesge.onlineshop.services.ProductsServices;
 

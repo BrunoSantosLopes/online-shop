@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ValidatorServicesTest {
 
     @Inject
-    private ValidatorServices validatorServices = new ValidatorServices();
+    private DataValidator validatorServices = new DataValidator();
 
     @Test
     void isInt() {
