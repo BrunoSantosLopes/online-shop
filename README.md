@@ -1,5 +1,5 @@
 # online-shop
-Projet OnlineShop avec JEE (formation HEG)
+OnlineShop - Travail étudiant - HES-SO HEG avec JEE (formation HEG)
 
 # Objectif
-L’objectif est la réalisation d’un magasin de vente en ligne.
+Réalisation d'une boutique en ligne avec le language de programmation Java et l'utilisation de la plateforme JEE
